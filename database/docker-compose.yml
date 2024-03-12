@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  imc-database:
+    image: mysql:8.3.0
+    container_name: imc-database
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    networks:
+      - imc-network
+
+  adminer:
+    image: adminer:4.8.1-standalone
+    container_name: imc-database-ihm
+    restart: always
+    #ports:
+    #   - 8080:8080
+    networks:
+      - imc-network
+
+networks:
+  imc-network:
+    external: true
+    name: imc-network
